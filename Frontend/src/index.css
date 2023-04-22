@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+*{
+  font-family: Montserrat, sans-serif;
+}
+.wrapper {
+
+    margin: 0 auto;
+    padding-bottom: 50px;
+    /* width: 1080px; */
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+  
+  }
+  
+  .container {
+    margin: 0 auto;
+    padding-right: 15px;
+    display: flex;
+    width: 1080px;
+    background-color: #EC8B5E;
+    /* background-color: #85FFBD; */
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+  
+  
+    margin-bottom: 50px;
+  }
+  
+  .details {
+    display: flex;
+    flex-direction: column;
+    margin-left: -50px;
+    gap: 20px;
+  }
+  
+  .row1 {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .dimension {
+    padding: 7px;
+    border: 3px solid darkblue;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  .language {
+    padding: 7px;
+    border: 3px solid darkblue;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  .poster {
+    width: 50%;
+  }
+  
+  .time {
+    color: darkblue;
+    font-weight: bolder;
+    font-size: 25px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  .genere {
+    color: darkblue;
+    font-size: 25px;
+    font-weight: bolder;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  .poster img {
+    width: 400px;
+    height: 500px;
+  }
+  
+  .cast-container{
+    display: flex;
+    margin-top: 15px;
+    gap: 20px;
+    width: 500px;
+    font-size: small;
+  }
+  
+  .cast-container img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid black;
+  }
+  
+  .cast {
+    text-align: center;
+    color: darkblue;
+    font-weight: bolder;
+  } 
+  
+  h1 {
+    color:darkblue;
+    font-weight: bolder;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 60;
+  }
+
+  .movie-bg {
+    background: hsla(186, 33%, 94%, 1);
+
+    background: linear-gradient(90deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%);
+
+  }
+
+  .login-page {
+    background: hsla(186, 33%, 94%, 1);
+
+background: linear-gradient(0deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%);
+
+background: -moz-linear-gradient(0deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%);
+
+background: -webkit-linear-gradient(0deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EBF4F5", endColorstr="#B5C6E0", GradientType=1 );
+
+  }
+
+  .notify-movie-bg {
+    background: hsla(186, 33%, 94%, 1);
+
+    background: linear-gradient(90deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%);
+  }
