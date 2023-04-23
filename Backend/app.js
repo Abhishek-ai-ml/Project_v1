@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-// const userRoute = require('./Userdetails');
+const bodyParser = require('body-parser');
+// const router = express.router();
+require('express-router');
 
 const cookieParser = require('cookie-parser');
 
@@ -10,7 +12,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+}));
 // app.use("/user", userRoute);
 
 app.get("/", (req, res)=>{
@@ -51,20 +56,17 @@ const user = mongoose.model("User")
 
 
 
-app.post("/signup", async(req, res)=>{
-    const {username, email, phone, password, confirmpassword} = req.body;    
+app.route("/signup").post(async(req, res)=>{
     try{
-        const olduser = user.findOne({email});
-
-        if(olduser){
-            res.json({error: "User exists"});
-        }
-        await user.create({
-            username, email, phone, password, confirmpassword
+        const u = await new user({
+            username : req.body.username,
+            email : req.body.email,
+            phoneNo : req.body.phoneNo,
+            password : req.body.password,
+            confirmPassword : req.body.confirmPassword,
         });
-        console.log(u);
         await u.save();
-        res.send({status: "ok"});
+        console.log(u);
     }
     catch(err){
         res.send({status: "error"});
@@ -72,23 +74,23 @@ app.post("/signup", async(req, res)=>{
 });
 
 
-async function run(){
-    try{
-        const u = await user.create({
-            username: "Kyle",
-            email: "abcd@gmail.com",
-            phone: "8882935982",
-            password: "abcd**",
-            confirmpassword: "abcd**"
-        })
-        await u.save();
-        console.log(u);
-    }
-    catch(e){
-        console.log(e);
-    }
-}
-run();
+// async function run(){
+//     try{
+//         const u = await user.create({
+//             username: "Kyle",
+//             email: "abcd@gmail.com",
+//             phone: "8882935982",
+//             password: "abcd**",
+//             confirmpassword: "abcd**"
+//         })
+//         await u.save();
+//         console.log(u);
+//     }
+//     catch(e){
+//         console.log(e);
+//     }
+// }
+// run();
 
 
 app.listen(8000, ()=>{
