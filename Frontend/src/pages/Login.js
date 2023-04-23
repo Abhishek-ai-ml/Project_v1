@@ -17,7 +17,7 @@ const Login = ({setIsLoggedIn, setUsername}) => {
 
   function submitHandler(event) {
     event.preventDefault();
-    setIsLoggedIn(true);
+    // setIsLoggedIn(true);
 
     const {email, password} = loginData;
     console.log(email, password);
@@ -35,13 +35,22 @@ const Login = ({setIsLoggedIn, setUsername}) => {
           })    
     }).then((res)=>res.json())
     .then((data)=>{
-      console.log("hello");
-      console.log(data, 'loginUser');
+      if(data.success === true) {
+        toast.success(data.message);
+        toast.success('Login Successfully');
+        navigate('/dashboard');
+        setIsLoggedIn(true);
+        console.log(data);
+        setUsername(data.data[0].username);
+
+      }
+      else {
+        toast.error(data.message);
+      }
     });
-    console.log('login Data');
-    console.log(loginData);
-    toast.success('Login Successfully');
-    navigate('/dashboard')
+    // console.log('login Data');
+    // console.log(loginData);
+    
   }
 
   
@@ -51,9 +60,8 @@ const Login = ({setIsLoggedIn, setUsername}) => {
     setShowPassword(!showPassword);
   }
 
-  let name = loginData.email.split('@').at(0).toUpperCase();
+  // let name = loginData.email.split('@').at(0).toUpperCase();
 
-  setUsername(name);
 
 
   return (

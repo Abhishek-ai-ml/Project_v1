@@ -104,18 +104,22 @@ app.route("/login").post(async(req, res)=>{
         console.log(req.body.email);
         const u = await user.find({email: req.body.email});
         console.log(u[0].password);
-        if(u.length == 0){
+        if(u.length === 0){
             console.log("User Does not exist!");
+            res.send({
+                success:false,
+                message:'User Does not Exist'
+            })
         }
-        else if(u[0].password == req.body.password){
-            res.send({status: "Welcome"});
+        else if(u[0].password == req.body.password && u[0].email == req.body.email){
+            res.send({success:true, data:u, message: "Welcome"});
         }
         else{
-            res.send({status: "Incorrect Password"});
+            res.send({success:false, message: "Incorrect Password"});
         }
     }
     catch(err){
-        res.send({status: "error"});
+        res.send({success:false, message: "Check Your Login Credentials"});
     }
 });
 
