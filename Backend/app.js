@@ -54,7 +54,7 @@ app.post("/signup", async(req, res)=>{
     try{
         const olduser = user.findOne({email});
 
-        if(olduser){
+        if(olduser.email){
             res.json({error: "User exists"});
         }
         await user.create({
