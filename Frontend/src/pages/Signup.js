@@ -17,9 +17,9 @@ const Signup = (props) => {
         if(formData.password === formData.confirmPassword) {
             event.preventDefault();
             console.log(formData);
-            const { name, email, phone, password, cpassword} = this.state;
-            console.log(name, email, phone, password, cpassword);
-            fetch("https://localhost:8000/signup",{
+            const {username, email, phone, password, confirmpassword} = formData;
+            console.log(username, email, phone, password, confirmpassword);
+            fetch("http://localhost:8000/signup",{
                 method:"POST",
                 crossDomain: true,
                 headers:{
@@ -28,11 +28,11 @@ const Signup = (props) => {
                     "Access-Control-Allow-Origin":"*"
                 },
                 body:JSON.stringify({
-                    name,
+                    username,
                     email,
                     phone,
                     password,
-                    cpassword
+                    confirmpassword
                 })
             }).then((res)=> res.json())
             .then((data)=>{

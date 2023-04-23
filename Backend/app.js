@@ -1,20 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-// const User = require('./User');
-const userRoute = require('./Userdetails');
+// const userRoute = require('./Userdetails');
 
 const cookieParser = require('cookie-parser');
 
 const app = express();
-app.listen(8000, ()=>{
-    console.log("Running at 8000..");
-});
+
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
-app.use("/user", userRoute);
+// app.use("/user", userRoute);
 
 app.get("/", (req, res)=>{
     res.send("HELLO WORLD!")
@@ -34,9 +31,9 @@ app.get("/", (req, res)=>{
 //     console.log("Server is listening to port 3001");
 // });
 
-app.use((req, res)=>{
-    res.status(400).send("eww")
-});
+// app.use((req, res)=>{
+//     res.status(400).send("eww")
+// });
 
 
 db_link = 'mongodb+srv://sushensinha8:owZCDr5zUt1C7tQr@cluster0.0gd6nyh.mongodb.net/test';
@@ -47,4 +44,29 @@ mongoose.connect(db_link)
 })
 .catch(function(){
     console.log("ERROR !!!");
+});
+
+require('./User');
+
+const user = mongoose.model("User")
+app.post("/signup", async(req, res)=>{
+    const {username, email, phone, password, confirmpassword} = req.body;
+    try{
+        const olduser = user.findOne({email});
+
+        if(olduser){
+            res.json({error: "User exists"});
+        }
+        await user.create({
+            username, email, phone, password, confirmpassword
+        });
+        res.send({status: "ok"});
+    }
+    catch(err){
+        res.send({status: "error"});
+    }
+});
+
+app.listen(8000, ()=>{
+    console.log("Running at 8000..");
 });
