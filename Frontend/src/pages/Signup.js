@@ -17,6 +17,27 @@ const Signup = (props) => {
         if(formData.password === formData.confirmPassword) {
             event.preventDefault();
             console.log(formData);
+            const { name, email, phone, password, cpassword} = this.state;
+            console.log(name, email, phone, password, cpassword);
+            fetch("https://localhost:8000/signup",{
+                method:"POST",
+                crossDomain: true,
+                headers:{
+                    "Content-Type":"application/json",
+                    Accept: "application/json",
+                    "Access-Control-Allow-Origin":"*"
+                },
+                body:JSON.stringify({
+                    name,
+                    email,
+                    phone,
+                    password,
+                    cpassword
+                })
+            }).then((res)=> res.json())
+            .then((data)=>{
+                console.log(data, "userRegister");
+            })
             // setUsername(formData.username);
             toast.success('SignUp successfull');
             toast.success('Now Login to Continue');
@@ -24,7 +45,7 @@ const Signup = (props) => {
         }
         else {
             event.preventDefault();
-            toast.error('Password doesnot matches');
+            toast.error('Password does not matches');
         }
     }
 
