@@ -58,6 +58,8 @@ const user = mongoose.model("User")
 
 app.route("/signup").post(async(req, res)=>{
     try{
+
+        const isEmailExist = await user.find({email:req.body.email});
         const u = await new user({
             username : req.body.username,
             email : req.body.email,
@@ -65,11 +67,34 @@ app.route("/signup").post(async(req, res)=>{
             password : req.body.password,
             confirmPassword : req.body.confirmPassword,
         });
-        await u.save();
+
+        console.log(isEmailExist);
+        
+        if(isEmailExist.length != 0) {
+            res.send({
+                success:true,
+                data:isEmailExist,
+                messagae:"User Exist"
+            });
+        }
+
+        else {
+            await u.save();
+            res.send({
+                success:false,
+                data:u,
+                messagae:"Account Created"
+            });
+        }
+        
+        // await u.save()
         console.log(u);
     }
     catch(err){
-        res.send({status: "error"});
+        res.send({
+            data:err,
+            messagae:'Error'
+        })
     }
 });
 

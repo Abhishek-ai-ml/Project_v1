@@ -34,14 +34,22 @@ const Signup = (props) => {
                     password,
                     confirmPassword
                 })
-            }).then((res)=> res.json())
+            })
+            .then((res)=> res.json())
             .then((data)=>{
-                console.log(data, "userRegister");
+                console.log(data);
+                if(data.success == true) {
+                    toast.error(data.messagae);
+                }
+                else {
+                    navigate('/login');
+                    toast.success('Login to continue');
+                }
             })
             // setUsername(formData.username);
-            toast.success('SignUp successfull');
-            toast.success('Now Login to Continue');
-            navigate('/login');
+            // toast.success('SignUp successfull');
+            // toast.success('Now Login to Continue');
+            // navigate('/login');
         }
         else {
             event.preventDefault();
