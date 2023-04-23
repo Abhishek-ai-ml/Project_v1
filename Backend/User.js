@@ -20,9 +20,12 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   confirmPassword: {
-    type: String,
+    type: String
     // required: true
-  }
+  },
+  notifyMovie: [{
+    type: Object
+  }]
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

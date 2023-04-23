@@ -36,11 +36,41 @@ const MovieDetails = (props) => {
     actorsData.map( actor => {
         actorsMap[actor.id] = actor;
     });
-
+    const _id = localStorage.getItem('userId');
+    fetch("http://localhost:8000/notify",{
+                method:"POST",
+                crossDomain: true,
+                headers:{
+                    "Content-Type":"application/json",
+                    Accept: "application/json",
+                    "Access-Control-Allow-Origin":"*"
+                },
+                body:JSON.stringify({
+                    _id,
+                    Movie: movie.Id
+                })
+            }).then((res) => res.json())
+            .then((data)=>{
+                setNotify(data.flag);
+            });
     function notifyHandler() {
         if(isLoggedIn) {
             setNotify( (notify) => !notify);
             setNotifyMovie( (prev) => [...prev, movie]);
+            let notifyMovie = props.notifyMovie;
+            fetch("http://localhost:8000/addUpcoming",{
+                method:"POST",
+                crossDomain: true,
+                headers:{
+                    "Content-Type":"application/json",
+                    Accept: "application/json",
+                    "Access-Control-Allow-Origin":"*"
+                },
+                body:JSON.stringify({
+                    _id,
+                    notifyMovie
+                })
+            });
             toast.success('Movie added succesfully to notify list');
             navigate('/movies');
         }
@@ -62,7 +92,6 @@ const MovieDetails = (props) => {
 
     console.log('notify value');
     console.log(notify);
-
   return (
     <div>
         <div className='w-9/12 mx-auto relative top-28 mb-[200px]'>
@@ -94,9 +123,9 @@ const MovieDetails = (props) => {
                     }
                     {
                         movie.ReleaseDate && <div>
-                                {
-                                    notify ? <button onClick={notifyHandler} className='text-xl text-red-900 border-red-900 border-4 px-5 py-2 rounded-lg font-bold group-hover:bg-red-900 group-hover:text-white'>Notify Me!</button> : ''
-                                }
+                                    {
+                                        notify ? <button onClick={notifyHandler} className='text-xl text-red-900 border-red-900 border-4 px-5 py-2 rounded-lg font-bold group-hover:bg-red-900 group-hover:text-white'>Notify Me!</button> : <button className='text-xl text-white border-black bg-gray-600 border-4 px-5 py-2 rounded-lg font-bold'>Added in notify list</button>
+                                    }
                             </div>
                     }
                 </div>

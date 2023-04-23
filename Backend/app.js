@@ -55,7 +55,7 @@ mongoose.connect(db_link)
 
 require('./User');
 
-const user = mongoose.model("User")
+const user = mongoose.model("User");
 
 
 
@@ -136,7 +136,63 @@ app.route("/userId").post(async(req, res)=>{
         res.send({status: "error"})
         console.log(err.message);
     }
-})
+});
+
+app.route("/upComing").post(async(req, res)=>{
+    // console.log(req.body._id, " a ");
+    try{
+        const id = req.body._id;
+        // if(id===req.body._id){
+        //     console.log("YES");
+        // }
+        // else{
+        //     console.log("NO");
+        // }
+        const u = await user.find({_id: id});
+        // console.log(u);
+        // console.log("hihii");
+        // console.log("64458179f68189771c3dbfbc", " b ");
+        
+        // const {obj} = u.notifyMovies;
+        res.send({data: u});
+    }
+    catch(err){
+        console.log(err.message);
+        res.send({status: "error"});
+    }
+});
+
+app.route("/addUpcoming").post(async(req, res) =>{
+    console.log("hello");
+    try{
+        // const u = await user.find(req.body._id);
+        // console.log(u);
+        const u = await user.findOneAndUpdate(req.body.id, {notifyMovie: req.body.notifyMovie}, {new:true});
+        console.log(u);
+    }
+    catch(err){
+        console.log(err.message);
+
+    }
+});
+app.route("/notify").post(async(req, res) =>{
+    try{
+        // const u = await user.find(req.body._id);
+        // console.log(u);
+
+        const u = await user.findById(req.body._id);
+        console.log(u);
+        const movies = u.notifyMovie;        
+        console.log(movies);
+        const flag = movies.includes(req.body.movie);
+        console.log(flag);
+        res.send({data: flag});
+    }
+    catch(err){
+        console.log(err.message);
+
+    }
+});
 // async function run(){
 //     try{
 //         const u = await user.create({

@@ -6,7 +6,7 @@ import {AiOutlineEyeInvisible} from 'react-icons/ai'
 
 const Signup = (props) => {
     // let setUsername = props.setUsername;
-    const [formData, setFormData] = useState({username:'', email:'', phoneNo:'', password:'', confirmPassword:''});
+    const [formData, setFormData] = useState({username:'', email:'', phoneNo:'', password:'', confirmPassword:'', notifyMovies:''});
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -17,7 +17,7 @@ const Signup = (props) => {
         if(formData.password === formData.confirmPassword) {
             event.preventDefault();
             console.log(formData);
-            const {username, email, phoneNo, password, confirmPassword} = formData;
+            const {username, email, phoneNo, password, confirmPassword, notifyMovies} = formData;
             console.log(username, email, phoneNo, password, confirmPassword);
             fetch("http://localhost:8000/signup",{
                 method:"POST",
@@ -32,7 +32,8 @@ const Signup = (props) => {
                     email,
                     phoneNo,
                     password,
-                    confirmPassword
+                    confirmPassword,
+                    notifyMovies
                 })
             })
             .then((res)=> res.json())

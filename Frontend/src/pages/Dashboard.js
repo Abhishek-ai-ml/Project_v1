@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 const Dashboard = (props) => {
     let notifyMovie = props.notifyMovie;
-    console.log('Inside Dashboard');
-    console.log(notifyMovie);
+    // console.log('Inside Dashboard');
+    // console.log(notifyMovie);
 
     // notifyMovie.push(movie);
     // setNotifyMovie( (prevMovie) => [...prevMovie, movie]);
