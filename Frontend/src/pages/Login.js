@@ -18,6 +18,26 @@ const Login = ({setIsLoggedIn, setUsername}) => {
   function submitHandler(event) {
     event.preventDefault();
     setIsLoggedIn(true);
+
+    const {email, password} = loginData;
+    console.log(email, password);
+    fetch("http://localhost:8000/login", {
+          method:"POST",
+          crossDomain: true,
+          headers:{
+              "Content-Type":"application/json",
+              Accept: "application/json",
+              "Access-Control-Allow-Origin":"*"
+          },
+          body: JSON.stringify({
+            email,
+            password
+          })    
+    }).then((res)=>res.json())
+    .then((data)=>{
+      console.log("hello");
+      console.log(data, 'loginUser');
+    });
     console.log('login Data');
     console.log(loginData);
     toast.success('Login Successfully');

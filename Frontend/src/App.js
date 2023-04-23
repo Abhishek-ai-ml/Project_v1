@@ -27,10 +27,10 @@ function App() {
 
   // const navigate = useNavigate(`movies/${searchLink}`);
 
-  console.log('movies data');
-  console.log(movie);
-  console.log(link);
-  console.log(searchLink);
+  // console.log('movies data');
+  // console.log(movie);
+  // console.log(link);
+  // console.log(searchLink);
 
   return (
     <div>

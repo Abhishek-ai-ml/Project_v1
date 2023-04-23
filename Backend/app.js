@@ -73,6 +73,26 @@ app.route("/signup").post(async(req, res)=>{
     }
 });
 
+app.route("/login").post(async(req, res)=>{
+    console.log("in the server");
+    try{
+        console.log(req.body.email);
+        const u = await user.find({email: req.body.email});
+        console.log(u[0].password);
+        if(u.length == 0){
+            console.log("User Does not exist!");
+        }
+        else if(u[0].password == req.body.password){
+            res.send({status: "Welcome"});
+        }
+        else{
+            res.send({status: "Incorrect Password"});
+        }
+    }
+    catch(err){
+        res.send({status: "error"});
+    }
+});
 
 // async function run(){
 //     try{
