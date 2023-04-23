@@ -70,7 +70,7 @@ const Signup = (props) => {
         <form onSubmit={submitHandler} className='mx-auto py-24 w-[60%] rounded-3xl shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] flex flex-col gap-y-10 items-center justify-center h-[75vh] login-page'>
             <div className='flex w-[80%] px-10 gap-3 items-center justify-between'>
                 <label htmlFor='username' className='text-lg font-bold text-blue-900'>Name:</label>
-                <input type='text' required id='username' name='username' placeholder='Enter your name' onChange={changeHandler} value={formData.name}
+                <input type='text' required id='username' name='username' placeholder='Enter your name' onChange={changeHandler} value={formData.username}
                     className='px-5 py-2 rounded-lg border-2 border-blue-900 bg-transparent text-blue-900 font-bold text-md'
                 />
             </div>

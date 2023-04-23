@@ -54,12 +54,12 @@ const user = mongoose.model("User")
 app.post("/signup", async(req, res)=>{
     const {username, email, phone, password, confirmpassword} = req.body;    
     try{
-        // const olduser = user.findOne(email);
-        // if(olduser){
-        //     res.json({error: "User exists"});
-        // }
-        console.log(username, email, phone, password, confirmpassword);
-        const u=await user.create({
+        const olduser = user.findOne({email});
+
+        if(olduser){
+            res.json({error: "User exists"});
+        }
+        await user.create({
             username, email, phone, password, confirmpassword
         });
         console.log(u);
