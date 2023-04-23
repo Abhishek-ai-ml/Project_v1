@@ -9,7 +9,10 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 
-
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     next();
+//   });
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
@@ -74,7 +77,7 @@ app.route("/signup").post(async(req, res)=>{
             res.send({
                 success:true,
                 data:isEmailExist,
-                messagae:"User Exist"
+                messagae:"User Exists"
             });
         }
 
@@ -99,13 +102,13 @@ app.route("/signup").post(async(req, res)=>{
 });
 
 app.route("/login").post(async(req, res)=>{
-    console.log("in the server");
+    // console.log("in the server");
     try{
-        console.log(req.body.email);
+        // console.log(req.body.email);
         const u = await user.find({email: req.body.email});
-        console.log(u[0].password);
+        // console.log(u[0].password);
         if(u.length === 0){
-            console.log("User Does not exist!");
+            // console.log("User Does not exist!");
             res.send({
                 success:false,
                 message:'User Does not Exist'
@@ -123,6 +126,17 @@ app.route("/login").post(async(req, res)=>{
     }
 });
 
+app.route("/userId").post(async(req, res)=>{
+    console.log(req.body._id);
+    try{
+        const u = await user.findById(req.body._id);
+        res.send(u);
+    }
+    catch(err){
+        res.send({status: "error"})
+        console.log(err.message);
+    }
+})
 // async function run(){
 //     try{
 //         const u = await user.create({

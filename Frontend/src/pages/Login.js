@@ -36,13 +36,30 @@ const Login = ({setIsLoggedIn, setUsername}) => {
     }).then((res)=>res.json())
     .then((data)=>{
       if(data.success === true) {
+        // console.log(data.data[0]._id);
+        localStorage.setItem('userId',data.data[0]._id);
+        console.log(localStorage.getItem('userId'));
         toast.success(data.message);
         toast.success('Login Successfully');
         navigate('/dashboard');
         setIsLoggedIn(true);
-        console.log(data);
-        setUsername(data.data[0].username);
-
+        const _id = localStorage.getItem('userId');
+        fetch("http://localhost:8000/userId", {
+          method:"POST",
+          crossDomain: true,
+          headers:{
+              "Content-Type":"application/json",
+              Accept: "application/json",
+              "Access-Control-Allow-Origin":"*"
+          },
+          body: JSON.stringify({
+            _id
+          })    
+    }).then((res)=>res.json())
+    .then((data)=>{
+          console.log(data.username);
+          setUsername(data.username);
+        });
       }
       else {
         toast.error(data.message);

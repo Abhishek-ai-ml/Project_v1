@@ -38,8 +38,9 @@ const Signup = (props) => {
             .then((res)=> res.json())
             .then((data)=>{
                 console.log(data);
-                if(data.success == true) {
-                    toast.error(data.messagae);
+                if(data.success === true) {
+                    toast.error(data.messagae + " Please Login!");
+                    navigate('/login');
                 }
                 else {
                     navigate('/login');
