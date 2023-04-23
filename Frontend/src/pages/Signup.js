@@ -17,8 +17,8 @@ const Signup = (props) => {
         if(formData.password === formData.confirmPassword) {
             event.preventDefault();
             console.log(formData);
-            const {username, email, phone, password, confirmpassword} = formData;
-            console.log(username, email, phone, password, confirmpassword);
+            const {username, email, phoneNo, password, confirmPassword} = formData;
+            console.log(username, email, phoneNo, password, confirmPassword);
             fetch("http://localhost:8000/signup",{
                 method:"POST",
                 crossDomain: true,
@@ -30,9 +30,9 @@ const Signup = (props) => {
                 body:JSON.stringify({
                     username,
                     email,
-                    phone,
+                    phoneNo,
                     password,
-                    confirmpassword
+                    confirmPassword
                 })
             }).then((res)=> res.json())
             .then((data)=>{

@@ -16,7 +16,6 @@ app.use(cors());
 app.get("/", (req, res)=>{
     res.send("HELLO WORLD!")
 });
-
 // const http = require('http');
 
 // const server = http.createServer((req, res)=>{
@@ -49,23 +48,48 @@ mongoose.connect(db_link)
 require('./User');
 
 const user = mongoose.model("User")
-app.post("/signup", async(req, res)=>{
-    const {username, email, phone, password, confirmpassword} = req.body;
-    try{
-        const olduser = user.findOne({email});
 
-        if(olduser){
-            res.json({error: "User exists"});
-        }
-        await user.create({
+
+
+app.post("/signup", async(req, res)=>{
+    const {username, email, phone, password, confirmpassword} = req.body;    
+    try{
+        // const olduser = user.findOne(email);
+        // if(olduser){
+        //     res.json({error: "User exists"});
+        // }
+        console.log(username, email, phone, password, confirmpassword);
+        const u=await user.create({
             username, email, phone, password, confirmpassword
         });
+        console.log(u);
+        await u.save();
         res.send({status: "ok"});
     }
     catch(err){
         res.send({status: "error"});
     }
 });
+
+
+async function run(){
+    try{
+        const u = await user.create({
+            username: "Kyle",
+            email: "abcd@gmail.com",
+            phone: "8882935982",
+            password: "abcd**",
+            confirmpassword: "abcd**"
+        })
+        await u.save();
+        console.log(u);
+    }
+    catch(e){
+        console.log(e);
+    }
+}
+run();
+
 
 app.listen(8000, ()=>{
     console.log("Running at 8000..");
