@@ -167,7 +167,7 @@ app.route("/addUpcoming").post(async(req, res) =>{
     try{
         // const u = await user.find(req.body._id);
         // console.log(u);
-        const u = await user.findOneAndUpdate(req.body.id, {notifyMovie: req.body.notifyMovie}, {new:true});
+        const u = await user.findOneAndUpdate(req.body._id, {notifyMovie: req.body.notifyMovie}, {new:true});
         console.log(u);
     }
     catch(err){
