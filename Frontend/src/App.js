@@ -27,11 +27,12 @@ function App() {
 
   const _id = localStorage.getItem("userId");
   
+  // useEffect(()=>{
+  //   setNotifyMovie([]);
+  // },[isLoggedIn]);
+
   useEffect(()=>{
     setNotifyMovie([]);
-  },[isLoggedIn]);
-
-  if(isLoggedIn === true){
     fetch("http://localhost:8000/upComing",{
                 method:"POST",
                 crossDomain: true,
@@ -46,9 +47,13 @@ function App() {
             }).then((res)=>res.json())
             .then((data)=>{
               const dt = data.data[0].notifyMovie;
+              console.log(dt);
               setNotifyMovie(dt);
             });
-  }
+  },[isLoggedIn])
+  // if(isLoggedIn === true){
+    
+  // }
   // const navigate = useNavigate(`movies/${searchLink}`);
 
   // console.log('movies data');

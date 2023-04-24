@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useState } from 'react';
@@ -13,8 +13,10 @@ const MovieDetails = (props) => {
     let time = "";
     let genre = "";
 
-
     const [notify, setNotify] = useState(true);
+    useEffect(()=>{
+        setNotify(true);
+    },[isLoggedIn]);
 
     movie.Languages.map( (language) => {lang+=language+", "});
     lang=lang.slice(0,-2);
@@ -57,7 +59,9 @@ const MovieDetails = (props) => {
         if(isLoggedIn) {
             setNotify( (notify) => !notify);
             setNotifyMovie( (prev) => [...prev, movie]);
+            // console.log(movie, "hahaha");
             let notifyMovie = props.notifyMovie;
+            // console.log(notifyMovie, "hahahaha");
             fetch("http://localhost:8000/addUpcoming",{
                 method:"POST",
                 crossDomain: true,

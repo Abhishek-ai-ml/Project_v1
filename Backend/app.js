@@ -142,18 +142,9 @@ app.route("/upComing").post(async(req, res)=>{
     // console.log(req.body._id, " a ");
     try{
         const id = req.body._id;
-        // if(id===req.body._id){
-        //     console.log("YES");
-        // }
-        // else{
-        //     console.log("NO");
-        // }
+        // console.log(req.body._id, "upcoming")
         const u = await user.find({_id: id});
-        // console.log(u);
-        // console.log("hihii");
-        // console.log("64458179f68189771c3dbfbc", " b ");
-        
-        // const {obj} = u.notifyMovies;
+        console.log(u);
         res.send({data: u});
     }
     catch(err){
@@ -163,12 +154,9 @@ app.route("/upComing").post(async(req, res)=>{
 });
 
 app.route("/addUpcoming").post(async(req, res) =>{
-    console.log("hello");
     try{
-        // const u = await user.find(req.body._id);
-        // console.log(u);
-        const u = await user.findOneAndUpdate(req.body._id, {notifyMovie: req.body.notifyMovie}, {new:true});
-        console.log(u);
+        const u = await user.findOneAndUpdate(req.body._id, req.body.notifyMovie);
+        console.log(u, "hello world");
     }
     catch(err){
         console.log(err.message);
