@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
   },
   notifyMovie: [{
     type: Object
+  }],
+  bookedMovie:[{
+    type:mongoose.Schema.Types.ObjectId, ref:'Movie'
   }]
 }, { timestamps: true });
 

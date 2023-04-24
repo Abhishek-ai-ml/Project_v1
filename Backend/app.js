@@ -179,7 +179,7 @@ app.route("/notify").post(async(req, res) =>{
     try{
         // const u = await user.find(req.body._id);
         // console.log(u);
-
+        
         const u = await user.findById(req.body._id);
         console.log(u);
         const movies = u.notifyMovie;        

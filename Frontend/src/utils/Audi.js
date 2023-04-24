@@ -6,7 +6,7 @@ const audiData = [
     },
     {
         id:2,
-        seats:10,
+        seats:20,
         seatInfo:[false, false, false, false, false, false, false, false, false, false,false, false, false, false, false, false, false, false, false, false]
     }
 ]

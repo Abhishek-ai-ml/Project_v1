@@ -124,7 +124,7 @@ const MovieDetails = (props) => {
                     {
                         movie.ReleaseDate && <div>
                                     {
-                                        notify ? <button onClick={notifyHandler} className='text-xl text-red-900 border-red-900 border-4 px-5 py-2 rounded-lg font-bold group-hover:bg-red-900 group-hover:text-white'>Notify Me!</button> : <button className='text-xl text-white border-black bg-gray-600 border-4 px-5 py-2 rounded-lg font-bold'>Added in notify list</button>
+                                        !notify ? <button onClick={notifyHandler} className='text-xl text-red-900 border-red-900 border-4 px-5 py-2 rounded-lg font-bold group-hover:bg-red-900 group-hover:text-white'>Notify Me!</button> : <button className='text-xl text-white border-black bg-gray-600 border-4 px-5 py-2 rounded-lg font-bold'>Added in notify list</button>
                                     }
                             </div>
                     }
